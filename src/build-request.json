@@ -1,0 +1,68 @@
+{
+  "kind": "build_request",
+  "title": "Replace site logo with uploaded image and add Twitter/X social link",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "text": "Replace the current site logo image with the user-uploaded image across the site (header and footer), using a static asset under frontend/public/assets/generated and updating all logo <img> references to the new filename.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "change the logo to the pic I'm sending you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
+        "Footer logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
+        "The logo renders crisply at the existing displayed size (h-8) without layout shift in header/footer."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Add a visible Twitter/X social link to the site that points to https://x.com/QuillworksMedia (e.g., in the header and/or footer), opening in a new tab with proper rel attributes and an accessible label.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "And add my socials link..",
+          "Here's twitter link :- https://x.com/QuillworksMedia"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A Twitter/X link is present on the marketing site UI and navigates to https://x.com/QuillworksMedia.",
+        "The link opens in a new tab and uses rel=\"noopener noreferrer\".",
+        "The link has accessible text/aria-label indicating it is the Twitter/X profile link."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (read-only UI component sources); compose them instead.",
+    "Keep all user-facing text in English."
+  ],
+  "nonGoals": [
+    "Adding additional social networks beyond the provided Twitter/X link.",
+    "Changing SEO metadata or page copy beyond what is necessary to display the new logo and social link."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": [
+      "Use the uploaded image as the new logo and crop/resize appropriately (20250307_184458.jpg > logo-quillworks.dim_512x256.png)"
+    ]
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

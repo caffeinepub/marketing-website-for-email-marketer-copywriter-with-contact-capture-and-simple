@@ -1,0 +1,55 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T04:07:51.983Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-10",
+        "summary": "Replace the current site logo image with the user-uploaded image across the site (header and footer), using a static asset under frontend/public/assets/generated and updating all logo <img> references to the new filename.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "frontend/src/components/layout/SiteHeader.tsx",
+          "frontend/src/components/layout/SiteFooter.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "frontend/src/components/layout/SiteHeader.tsx",
+          "frontend/src/components/layout/SiteFooter.tsx"
+        ]
+      },
+      {
+        "id": "REQ-11",
+        "summary": "Add a visible Twitter/X social link to the site that points to https://x.com/QuillworksMedia (e.g., in the header and/or footer), opening in a new tab with proper rel attributes and an accessible label.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/layout/SiteFooter.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/layout/SiteFooter.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+    "frontend/src/components/layout/SiteFooter.tsx",
+    "frontend/src/components/layout/SiteHeader.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

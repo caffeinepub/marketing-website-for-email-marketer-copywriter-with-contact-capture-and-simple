@@ -1,0 +1,44 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-current-site-logo-image-with-the-user-uploaded-image-across-the-site-header-and-footer-using-a-static-asset-under-frontend-public-assets-generated-and-updating-all-logo-img-references-to-the-new-filename",
+      "featureTitle": "Replace the current site logo image with the user-uploaded image across the site (header and footer), using a static asset under frontend/public/assets/generated and updating all logo <img> references to the new filename.",
+      "files": [
+        "frontend/src/components/layout/SiteFooter.tsx",
+        "frontend/src/components/layout/SiteHeader.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-visible-twitter-x-social-link-to-the-site-that-points-to-https-x-com-quillworksmedia-e-g-in-the-header-and-or-footer-opening-in-a-new-tab-with-proper-rel-attributes-and-an-accessible-label",
+      "featureTitle": "Add a visible Twitter/X social link to the site that points to https://x.com/QuillworksMedia (e.g., in the header and/or footer), opening in a new tab with proper rel attributes and an accessible label.",
+      "files": [
+        "frontend/src/components/layout/SiteFooter.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

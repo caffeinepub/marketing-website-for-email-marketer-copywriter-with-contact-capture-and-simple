@@ -1,0 +1,23 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, defining routes for the marketing page (/) and admin inbox (/admin), wrapped with ThemeProvider and including the Toaster for notifications.",
+  "frontend/src/pages/MarketingPage.tsx": "Landing page component that composes all marketing sections (Hero, Services, Process, About, Contact) in a single-page layout.",
+  "frontend/src/pages/AdminInboxPage.tsx": "Protected admin page that displays inquiry inbox with authentication check, profile setup modal, list/detail view of inquiries, and delete functionality with proper loading states.",
+  "frontend/src/components/sections/HeroSection.tsx": "Hero section component featuring headline, subheadline, CTA buttons, and hero illustration image with smooth scroll navigation to contact form.",
+  "frontend/src/components/sections/ServicesSection.tsx": "Services section displaying three service cards (Email Campaigns, Newsletter Writing, Automation Sequences) with icons, descriptions, and benefit lists.",
+  "frontend/src/components/sections/ProcessSection.tsx": "Process section showing four-step workflow (Discovery, Strategy, Writing, Delivery) in numbered cards with connecting lines on desktop.",
+  "frontend/src/components/sections/AboutSection.tsx": "About section with centered two-paragraph bio describing the email marketer's expertise and approach.",
+  "frontend/src/components/sections/ContactSection.tsx": "Contact form section with validated inputs (name, email, company, service interest, message), success/error states, and backend integration for inquiry submission.",
+  "frontend/src/components/layout/SiteHeader.tsx": "Sticky header with new Quillworks logo, navigation menu (Services, Process, About, Contact, Admin), mobile hamburger menu, and CTA button with smooth scroll functionality.",
+  "frontend/src/components/layout/SiteFooter.tsx": "Footer component with new Quillworks logo, service description, quick links navigation, Twitter/X social link, and attribution with heart icon linking to caffeine.ai.",
+  "frontend/src/components/layout/Section.tsx": "Reusable section wrapper component providing consistent spacing, max-width container, and optional title/description headers.",
+  "frontend/src/components/auth/LoginButton.tsx": "Authentication button component that handles Internet Identity login/logout with loading states and query cache clearing on logout.",
+  "frontend/src/components/auth/ProfileSetupModal.tsx": "Modal dialog for first-time user profile setup, collecting user name and saving to backend with validation and error handling.",
+  "frontend/src/hooks/useCreateInquiry.ts": "React Query mutation hook for creating new contact inquiries with automatic cache invalidation.",
+  "frontend/src/hooks/useCurrentUserProfile.ts": "React Query hooks for fetching and saving user profiles with proper loading state management to prevent modal flash.",
+  "frontend/src/hooks/useAdminInquiries.ts": "React Query hooks for listing and deleting inquiries with authentication checks and cache invalidation.",
+  "frontend/src/lib/navigation.ts": "Navigation configuration defining site sections (services, process, about, contact) as single source of truth for header/footer links.",
+  "frontend/src/content/copy.ts": "Centralized content repository containing all marketing copy (headlines, descriptions, service details, process steps) in English.",
+  "frontend/src/index.css": "Global styles with OKLCH color system using warm orange/amber primary palette (hue 35) instead of blue/purple, with proper light/dark mode support.",
+  "frontend/tailwind.config.js": "Tailwind configuration with Inter font family, extended color tokens, consistent border radius, and custom animations.",
+  "frontend/index.html": "HTML entry point with SEO metadata, Open Graph tags, Twitter card tags, and proper page title/description for email copywriting services."
+}

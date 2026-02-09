@@ -1,0 +1,49 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update site logo asset and add Twitter/X social link",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Replace the current site logo with the new generated logo asset across header and footer.",
+      "acceptanceCriteria": [
+        "Header logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
+        "Footer logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
+        "The logo renders crisply at the existing displayed size (h-8) without layout shift in header/footer."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "operation": "create",
+          "description": "Add the new generated logo asset (cropped/resized from the uploaded 20250307_184458.jpg) as a static file to be used site-wide."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Update the header logo <img> src to use /assets/generated/logo-quillworks.dim_512x256.png while keeping the existing sizing classes (h-8 w-auto) to avoid layout shift."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Update the footer logo <img> src to use /assets/generated/logo-quillworks.dim_512x256.png while keeping the existing sizing classes (h-8 w-auto) to avoid layout shift."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Add a visible Twitter/X link to https://x.com/QuillworksMedia that opens in a new tab with proper rel attributes and accessible labeling.",
+      "acceptanceCriteria": [
+        "A Twitter/X link is present on the marketing site UI and navigates to https://x.com/QuillworksMedia.",
+        "The link opens in a new tab and uses rel=\"noopener noreferrer\".",
+        "The link has accessible text/aria-label indicating it is the Twitter/X profile link."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Add a visible Twitter/X social link pointing to https://x.com/QuillworksMedia in the footer, using target=\"_blank\" and rel=\"noopener noreferrer\", and include accessible text and/or aria-label indicating it is the Twitter/X profile link."
+        }
+      ]
+    }
+  ]
+}
