@@ -1,47 +1,116 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update site logo asset and add Twitter/X social link",
+  "title": "Resolve frontend build/deploy failure and ensure live marketing site smoke-test readiness",
   "requirements": [
     {
-      "id": "REQ-10",
-      "summary": "Replace the current site logo with the new generated logo asset across header and footer.",
+      "id": "REQ-1",
+      "summary": "Fix the frontend production build/deployment failure by removing/repairing missing module imports and stabilizing static asset handling with minimal changes.",
       "acceptanceCriteria": [
-        "Header logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
-        "Footer logo no longer uses /assets/generated/logo-email-copywriter.dim_512x256.png and instead uses the new generated logo asset.",
-        "The logo renders crisply at the existing displayed size (h-8) without layout shift in header/footer."
+        "A deployment run that previously failed now completes without errors using the same production/live deployment command/process.",
+        "The specific root cause is documented in the PR/commit description (what failed, why, and what changed to fix it)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
-          "operation": "create",
-          "description": "Add the new generated logo asset (cropped/resized from the uploaded 20250307_184458.jpg) as a static file to be used site-wide."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Remove/replace imports that can fail production builds due to missing files (e.g., ui toaster module) and ensure the root layout renders without relying on unresolved path aliases."
+        },
+        {
+          "path": "frontend/src/components/layout/Section.tsx",
+          "operation": "modify",
+          "description": "Replace the unresolved '@/lib/utils' import with a reliable local relative import to a newly added utility module to prevent production build module-resolution failures."
         },
         {
           "path": "frontend/src/components/layout/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Update the header logo <img> src to use /assets/generated/logo-quillworks.dim_512x256.png while keeping the existing sizing classes (h-8 w-auto) to avoid layout shift."
+          "description": "Replace '@/components/ui/button' with a local composed button component (outside immutable ui paths) to eliminate dependency on potentially missing shadcn/ui files and avoid path-alias resolution issues."
         },
         {
-          "path": "frontend/src/components/layout/SiteFooter.tsx",
+          "path": "frontend/src/components/sections/HeroSection.tsx",
           "operation": "modify",
-          "description": "Update the footer logo <img> src to use /assets/generated/logo-quillworks.dim_512x256.png while keeping the existing sizing classes (h-8 w-auto) to avoid layout shift."
+          "description": "Replace '@/components/ui/button' with the local composed button component to ensure consistent build behavior in production."
+        },
+        {
+          "path": "frontend/src/components/sections/ServicesSection.tsx",
+          "operation": "modify",
+          "description": "Replace '@/components/ui/card' imports with a local composed card component to prevent build failures from missing/immutable ui component paths."
+        },
+        {
+          "path": "frontend/src/components/sections/ProcessSection.tsx",
+          "operation": "modify",
+          "description": "Replace '@/components/ui/card' imports with a local composed card component to prevent build failures from missing/immutable ui component paths."
+        },
+        {
+          "path": "frontend/src/components/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Replace '@/components/ui/card' imports with a local composed card component while preserving the required external links (mailto, X/Twitter, Instagram)."
+        },
+        {
+          "path": "frontend/src/components/primitives/Button.tsx",
+          "operation": "create",
+          "description": "Add a small local Button component (Tailwind-styled) to replace reliance on unresolved shadcn/ui Button imports; keeps changes minimal and avoids editing immutable ui paths."
+        },
+        {
+          "path": "frontend/src/components/primitives/Card.tsx",
+          "operation": "create",
+          "description": "Add small local Card primitives (Card, CardHeader, CardContent, CardTitle, CardDescription) used by sections to replace unresolved shadcn/ui Card imports; avoids editing immutable ui paths."
+        },
+        {
+          "path": "frontend/src/lib/utils.ts",
+          "operation": "create",
+          "description": "Add the missing utility module providing a lightweight className combiner (cn) used by layout components, eliminating a common production build 'module not found' failure."
+        },
+        {
+          "path": "frontend/public/assets/generated/hero-illustration.dim_1600x900.png",
+          "operation": "create",
+          "description": "Ensure the referenced generated asset exists at the public static path to prevent 404s for above-the-fold content in production."
+        },
+        {
+          "path": "frontend/public/assets/generated/icons-set.dim_512x512.png",
+          "operation": "create",
+          "description": "Ensure the referenced generated asset exists at the public static path to prevent missing icon sprite requests in production."
+        },
+        {
+          "path": "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "operation": "create",
+          "description": "Ensure the referenced generated asset exists at the public static path to prevent missing logo requests in production header/footer."
+        },
+        {
+          "path": "frontend/public/assets/generated/logo-email-copywriter.dim_512x256.png",
+          "operation": "create",
+          "description": "Add the generated logo asset to the public static folder so it is available if referenced by metadata or future UI usage."
+        },
+        {
+          "path": "frontend/DEPLOYMENT_ROOT_CAUSE.md",
+          "operation": "create",
+          "description": "Add a short root-cause note describing the exact failing production build step, the error output, and the minimal frontend changes applied to make deployment succeed."
         }
       ]
     },
     {
-      "id": "REQ-11",
-      "summary": "Add a visible Twitter/X link to https://x.com/QuillworksMedia that opens in a new tab with proper rel attributes and accessible labeling.",
+      "id": "REQ-2",
+      "summary": "Support and validate a post-deploy smoke test of the live marketing page (header/footer render, contact links present, and no critical asset 404s).",
       "acceptanceCriteria": [
-        "A Twitter/X link is present on the marketing site UI and navigates to https://x.com/QuillworksMedia.",
-        "The link opens in a new tab and uses rel=\"noopener noreferrer\".",
-        "The link has accessible text/aria-label indicating it is the Twitter/X profile link."
+        "Visiting the live URL loads the marketing page without a blank screen or console-fatal errors.",
+        "Header and footer are visible, and the Contact section includes links for email, X/Twitter, and Instagram.",
+        "No missing critical static asset requests are observed for above-the-fold content (e.g., logo/hero image requests do not 404)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/layout/SiteFooter.tsx",
+          "path": "frontend/src/utils/smokeCheck.ts",
+          "operation": "create",
+          "description": "Add a lightweight client-side smoke-check helper that can validate presence of key DOM elements (header, footer) and required Contact links, and verify key hero/logo image elements are present to aid live verification."
+        },
+        {
+          "path": "frontend/src/pages/MarketingPage.tsx",
           "operation": "modify",
-          "description": "Add a visible Twitter/X social link pointing to https://x.com/QuillworksMedia in the footer, using target=\"_blank\" and rel=\"noopener noreferrer\", and include accessible text and/or aria-label indicating it is the Twitter/X profile link."
+          "description": "Wire an optional smoke-check trigger (e.g., guarded behind a query param) that runs after initial render and logs a clear pass/fail summary for header/footer, Contact links (email/X/Instagram), and presence of key above-the-fold images."
+        },
+        {
+          "path": "frontend/SMOKE_TEST.md",
+          "operation": "create",
+          "description": "Document a short post-deploy smoke test checklist including the exact items required: homepage load, header/footer visible, Contact links (email, X/Twitter, Instagram), and confirming no critical static asset 404s for logo/hero."
         }
       ]
     }

@@ -1,6 +1,8 @@
+import { LABELS } from '../content/labels';
+
 export const NAV_ITEMS = [
-  { id: 'services', label: 'Services' },
-  { id: 'process', label: 'Process' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'services', label: LABELS.navigation.services },
+  { id: 'process', label: LABELS.navigation.process },
+  { id: 'about', label: LABELS.navigation.about },
+  { id: 'contact', label: LABELS.navigation.contact },
 ] as const;

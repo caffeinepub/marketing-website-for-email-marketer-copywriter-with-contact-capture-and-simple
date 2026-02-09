@@ -1,123 +1,32 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Website project for an email marketer/copywriter offering email writing services to multiple businesses.",
+  "projectStateVersion": 3,
+  "summary": "New project",
   "architectural_notes": [],
-  "known_issues": [],
-  "isFixRequest": false,
-  "imageRequirements": "## Edit Images\n- Use the uploaded image as the new logo and crop/resize appropriately (20250307_184458.jpg > logo-quillworks.dim_512x256.png)",
+  "known_issues": [
+    "Live deployment failed due to deployment error; user requested retry to make it live."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
-      "id": "feature-create-a-responsive-marketing-website-landing-style-for-an-email-marketer-copywriter-offering-email-writing-services-to-business-clients-with-clear-positioning-service-overview-and-strong-calls-to-action",
-      "title": "Create a responsive marketing website (landing-style) for an email marketer/copywriter offering email writing services to business clients, with clear positioning, service overview, and strong calls-to-action.",
+      "id": "feature-identify-the-root-cause-of-the-previous-live-deployment-failure-deployment-error-by-reproducing-the-production-deployment-locally-or-in-the-ci-deploy-environment-and-capturing-the-exact-failing-step-and-error-output-then-apply-the-minimal-code-config-changes-needed-so-the-same-deployment-completes-successfully",
+      "title": "Identify the root cause of the previous live deployment failure (“Deployment error”) by reproducing the production deployment locally (or in the CI/deploy environment) and capturing the exact failing step and error output, then apply the minimal code/config changes needed so the same deployment completes successfully.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-apply-a-coherent-visual-theme-across-the-site-colors-typography-spacing-components-suitable-for-a-professional-copywriter-service-brand-avoid-default-looking-styling-and-keep-the-design-consistent-across-all-sections-pages",
-      "title": "Apply a coherent visual theme across the site (colors, typography, spacing, components) suitable for a professional copywriter service brand; avoid default-looking styling and keep the design consistent across all sections/pages.",
+      "id": "feature-after-the-deployment-succeeds-perform-a-post-deploy-smoke-test-of-the-live-site-to-confirm-it-is-accessible-and-functional-homepage-loads-header-footer-render-and-the-contact-section-external-links-are-present",
+      "title": "After the deployment succeeds, perform a post-deploy smoke test of the live site to confirm it is accessible and functional (homepage loads, header/footer render, and the Contact section external links are present).",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
-    },
-    {
-      "id": "feature-implement-site-navigation-and-basic-content-pages-sections-for-services-about-and-contact-either-as-separate-routes-or-anchored-sections-including-a-persistent-header-nav-and-footer-with-essential-links",
-      "title": "Implement site navigation and basic content pages/sections for: Services, About, and Contact (either as separate routes or anchored sections), including a persistent header nav and footer with essential links.",
-      "reqIds": [
-        "REQ-3"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-contact-form-for-prospective-clients-to-submit-inquiries-name-email-company-website-optional-message-and-service-interest-with-client-side-validation-and-a-success-error-state",
-      "title": "Add a contact form for prospective clients to submit inquiries (name, email, company/website optional, message, and service interest), with client-side validation and a success/error state.",
-      "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-simple-admin-inbox-page-in-the-frontend-to-view-and-manage-submitted-inquiries-protected-by-internet-identity-login-and-an-allowlist-owner-check-enforced-by-the-backend",
-      "title": "Add a simple admin inbox page in the frontend to view and manage submitted inquiries, protected by Internet Identity login and an allowlist/owner check enforced by the backend.",
-      "reqIds": [
-        "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-all-user-facing-text-is-in-english-and-includes-clear-service-focused-copy-headline-service-descriptions-process-steps-and-contact-prompts-appropriate-for-selling-email-writing-services-to-businesses",
-      "title": "Ensure all user-facing text is in English and includes clear service-focused copy (headline, service descriptions, process steps, and contact prompts) appropriate for selling email writing services to businesses.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-basic-seo-and-share-metadata-for-the-marketing-site-page-title-description-and-open-graph-twitter-metadata-consistent-with-the-email-marketing-copywriting-service-offering",
-      "title": "Add basic SEO and share metadata for the marketing site (page title, description, and Open Graph/Twitter metadata) consistent with the email marketing/copywriting service offering.",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-render-generated-brand-images-as-static-assets-from-frontend-public-assets-generated-and-use-them-in-the-site-e-g-header-hero",
-      "title": "Render generated brand images as static assets from frontend/public/assets/generated and use them in the site (e.g., header/hero).",
-      "reqIds": [
-        "REQ-9"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-replace-the-current-site-logo-image-with-the-user-uploaded-image-across-the-site-header-and-footer-using-a-static-asset-under-frontend-public-assets-generated-and-updating-all-logo-img-references-to-the-new-filename",
-      "title": "Replace the current site logo image with the user-uploaded image across the site (header and footer), using a static asset under frontend/public/assets/generated and updating all logo <img> references to the new filename.",
-      "reqIds": [
-        "REQ-10"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-a-visible-twitter-x-social-link-to-the-site-that-points-to-https-x-com-quillworksmedia-e-g-in-the-header-and-or-footer-opening-in-a-new-tab-with-proper-rel-attributes-and-an-accessible-label",
-      "title": "Add a visible Twitter/X social link to the site that points to https://x.com/QuillworksMedia (e.g., in the header and/or footer), opening in a new tab with proper rel attributes and an accessible label.",
-      "reqIds": [
-        "REQ-11"
-      ],
-      "version": 1
     }
   ],
-  "new_feature_requests": [
-    {
-      "id": "AR-1",
-      "summary": "Create a marketing website promoting the user's email marketing & copywriting (email writing) services for business clients.",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-6",
-      "summary": "Create backend storage and APIs for contact inquiries, including: create inquiry (anonymous allowed), list inquiries (admin-only), and delete inquiry (admin-only).",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Update the site logo to use the user-provided image asset (replace existing wordmark/logo).",
-      "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-8",
-      "summary": "Add social link(s) to the site (at least Twitter/X: https://x.com/QuillworksMedia), e.g., in header/footer.",
-      "reqIds": [],
-      "status": "pending"
-    }
-  ],
-  "gameProjectType": "none",
-  "projectName": "Marketing website for email marketer/copywriter with contact capture and simple admin inbox",
+  "new_feature_requests": [],
+  "projectName": "Fix deployment error and successfully deploy the app live",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

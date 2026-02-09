@@ -1,3 +1,5 @@
+import { LABELS } from './labels';
+
 export const COPY = {
   hero: {
     headline: 'Email Copy That Converts',
@@ -6,7 +8,7 @@ export const COPY = {
     cta: 'Start Your Project',
   },
   services: {
-    title: 'Services',
+    title: LABELS.navigation.services,
     description: 'Comprehensive email copywriting solutions tailored to your business goals',
     items: [
       {
@@ -68,20 +70,20 @@ export const COPY = {
     ],
   },
   about: {
-    title: 'About',
+    title: LABELS.navigation.about,
     paragraphs: [
       "I'm an email marketer and copywriter specializing in creating high-converting email campaigns for businesses. With a deep understanding of consumer psychology and proven copywriting frameworks, I help companies transform their email marketing from an afterthought into a revenue-driving machine.",
       "Whether you need a single campaign or ongoing email support, I bring strategic thinking, creative execution, and a results-focused approach to every project. Let's work together to make your emails impossible to ignore.",
     ],
   },
   contact: {
-    title: 'Get Started',
+    title: LABELS.cta.getStarted,
     description: "Ready to elevate your email marketing? Let's discuss your project.",
-    formTitle: 'Send Me a Message',
-    formDescription: "Tell me about your business and email marketing needs. I'll get back to you within 24 hours.",
+    formTitle: 'Get in Touch',
+    formDescription: "Reach out via email or DM me on social media. I'll get back to you within 24 hours.",
     submitButton: 'Send Message',
     successMessage:
-      "Thank you for your inquiry! I'll review your message and get back to you within 24 hours.",
+      "Thank you for your inquiry! I'll reply to your email within 24 hours.",
     errorMessage: 'Failed to send your message. Please try again or contact me directly.',
   },
 } as const;

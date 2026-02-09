@@ -1,10 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider, createRoute, createRootRoute, Outlet } from '@tanstack/react-router';
 import MarketingPage from './pages/MarketingPage';
-import AdminInboxPage from './pages/AdminInboxPage';
 import SiteHeader from './components/layout/SiteHeader';
 import SiteFooter from './components/layout/SiteFooter';
-import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from 'next-themes';
 
 // Layout component with header and footer
@@ -16,7 +13,6 @@ function RootLayout() {
         <Outlet />
       </main>
       <SiteFooter />
-      <Toaster />
     </div>
   );
 }
@@ -32,13 +28,7 @@ const indexRoute = createRoute({
   component: MarketingPage,
 });
 
-const adminRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/admin',
-  component: AdminInboxPage,
-});
-
-const routeTree = rootRoute.addChildren([indexRoute, adminRoute]);
+const routeTree = rootRoute.addChildren([indexRoute]);
 
 const router = createRouter({ routeTree });
 

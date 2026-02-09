@@ -1,5 +1,5 @@
 import Section from '../layout/Section';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../primitives/Card';
 import { COPY } from '../../content/copy';
 
 export default function ServicesSection() {

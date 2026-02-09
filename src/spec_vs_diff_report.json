@@ -1,34 +1,71 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T04:07:51.980Z",
-  "summary": "The diff updates the header and footer logo <img> sources to `/assets/generated/logo-quillworks.dim_512x256.png` and adds a Twitter/X link in the footer with the correct URL, `target=\"_blank\"`, `rel=\"noopener noreferrer\"`, and an aria-label. However, the diff does not show the new generated logo asset being added under `frontend/public/assets/generated`, and it introduces a new footer attribution/link that was not requested.",
+  "generatedAt": "2026-02-09T05:21:22.362Z",
+  "summary": "The diff adds documentation describing a frontend build/root-cause and introduces local frontend utilities/primitives to resolve missing imports. It also adds a smoke-test checklist and a client-side smoke check utility. However, the diff does not contain evidence that the failing production deployment was actually reproduced/run successfully, nor that a live post-deploy smoke test was performed. There are also backend/auth/admin-related changes that appear unrelated to fixing the deployment failure.",
   "missing_requirements": [
     {
-      "id": "REQ-10",
-      "requirement": "Use the uploaded image as the new logo via a static asset under frontend/public/assets/generated (new generated logo file) and update all logo <img> references to the new filename across the site (header and footer).",
-      "reason": "Header/footer references were updated to the new filename, but the diff shows no new file added under `frontend/public/assets/generated`, so the actual required static asset addition is not evidenced.",
+      "id": "REQ-1",
+      "requirement": "Reproduce the production/live deployment failure and capture the exact failing step and error output, then apply minimal changes so the same production/live deployment command completes successfully.",
+      "reason": "The diff includes a narrative root-cause document and code changes aimed at fixing build/import issues, but it does not include the actual failing command output/logs or any evidence that the same production deployment process was re-run and now succeeds (e.g., CI logs, deploy script output, or recorded error output).",
       "evidence": [
-        "File diff summary: \"Added: 0\" (no new asset file added)",
-        "frontend/src/components/layout/SiteHeader.tsx",
-        "frontend/src/components/layout/SiteFooter.tsx"
+        "frontend/DEPLOYMENT_ROOT_CAUSE.md",
+        "frontend/src/lib/utils.ts",
+        "frontend/src/components/primitives/Button.tsx",
+        "frontend/src/components/primitives/Card.tsx",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Perform a post-deploy smoke test of the live site (homepage loads, header/footer render, Contact links present; no critical above-the-fold asset 404s).",
+      "reason": "The diff adds a manual checklist and an optional automated smoke-check utility, but there is no evidence in the diff that the smoke test was actually executed against the live URL or that results were recorded/verified.",
+      "evidence": [
+        "frontend/SMOKE_TEST.md",
+        "frontend/src/utils/smokeCheck.ts"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Added a new footer attribution section with a heart icon and an external link to caffeine.ai (\"© 2026. Built with ... using caffeine.ai\").",
-      "reason": "The BuildRequest did not request adding or changing attribution content/links; non-goals include changing page copy beyond what is necessary for the new logo and Twitter/X link.",
+      "description": "Backend authorization/user profile/role assignment logic added/modified in the Motoko canister.",
+      "reason": "The BuildRequest is narrowly focused on fixing a deployment error and validating the live marketing site; the diff shows substantial backend access-control and profile endpoints that are not evidenced as necessary to resolve the deployment failure in the provided root-cause writeup (which discusses frontend build/import issues).",
       "evidence": [
-        "frontend/src/components/layout/SiteFooter.tsx"
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Admin inbox/protected admin page and related inquiry/admin hooks described as part of the change set.",
+      "reason": "The BuildRequest non-goals disallow adding new unrelated product features; the diff summary indicates an admin inbox feature set (protected admin page, inquiry list/detail, delete) that appears unrelated to resolving a deployment failure for the marketing site.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Theme system and broader UI/styling changes (ThemeProvider usage, global color system changes) not strictly required to fix missing-module deployment error.",
+      "reason": "The root-cause document focuses on missing modules/import resolution; adding theme provider and changing global styling tokens may be beyond the minimal fix needed for deployment success.",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "frontend-file-summaries.txt"
       ]
     }
   ],
-  "confidence": 0.74,
+  "confidence": 0.66,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/components/layout/SiteFooter.tsx",
+    "frontend/DEPLOYMENT_ROOT_CAUSE.md",
+    "frontend/SMOKE_TEST.md",
+    "frontend/src/App.tsx",
     "frontend/src/components/layout/SiteHeader.tsx",
+    "frontend/src/components/primitives/Button.tsx",
+    "frontend/src/components/primitives/Card.tsx",
+    "frontend/src/components/sections/ContactSection.tsx",
+    "frontend/src/components/sections/HeroSection.tsx",
+    "frontend/src/components/sections/ProcessSection.tsx",
+    "frontend/src/components/sections/ServicesSection.tsx",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/utils/smokeCheck.ts",
     "project_state.json"
   ]
 }

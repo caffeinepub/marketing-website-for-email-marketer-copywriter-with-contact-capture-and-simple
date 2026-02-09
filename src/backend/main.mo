@@ -1,109 +1,56 @@
 import Map "mo:core/Map";
-import Text "mo:core/Text";
 import Principal "mo:core/Principal";
-import Iter "mo:core/Iter";
-import Time "mo:core/Time";
-import Order "mo:core/Order";
-import Nat "mo:core/Nat";
-import Array "mo:core/Array";
-import Runtime "mo:core/Runtime";
-import MixinAuthorization "authorization/MixinAuthorization";
+import Error "mo:core/Error";
 import AccessControl "authorization/access-control";
+import MixinAuthorization "authorization/MixinAuthorization";
 
 actor {
-  // Initialize the authorization system
+  // Initialize the access control state
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
 
-  // User Profile type
   public type UserProfile = {
     name : Text;
   };
 
-  // Storage for user profiles
   let userProfiles = Map.empty<Principal, UserProfile>();
 
-  // Get caller's user profile (user-only)
+  // Get the caller's own profile (user-only)
   public query ({ caller }) func getCallerUserProfile() : async ?UserProfile {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
-      Runtime.trap("Unauthorized: Only users can access profiles");
+      throw Error.reject("Unauthorized: Only users can view profiles");
     };
     userProfiles.get(caller);
   };
 
-  // Get any user's profile (own profile or admin)
+  // Get any user's profile (own profile or admin viewing others)
   public query ({ caller }) func getUserProfile(user : Principal) : async ?UserProfile {
     if (caller != user and not AccessControl.isAdmin(accessControlState, caller)) {
-      Runtime.trap("Unauthorized: Can only view your own profile");
+      throw Error.reject("Unauthorized: Can only view your own profile");
     };
     userProfiles.get(user);
   };
 
-  // Save caller's user profile (user-only)
+  // Save the caller's own profile (user-only)
   public shared ({ caller }) func saveCallerUserProfile(profile : UserProfile) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
-      Runtime.trap("Unauthorized: Only users can save profiles");
+      throw Error.reject("Unauthorized: Only users can save profiles");
     };
     userProfiles.add(caller, profile);
   };
 
-  // Inquiry data structure
-  type Inquiry = {
-    id : Nat;
-    name : Text;
-    email : Text;
-    company : ?Text;
-    message : Text;
-    serviceInterest : Text;
-    timestamp : Time.Time;
+  // Admin function to assign roles
+  public shared ({ caller }) func assignUserRole(user : Principal, role : AccessControl.UserRole) : async () {
+    AccessControl.assignRole(accessControlState, caller, user, role);
   };
 
-  // Module for Inquiry comparisons
-  module Inquiry {
-    public func compare(a : Inquiry, b : Inquiry) : Order.Order {
-      Nat.compare(b.id, a.id); // Descending order by ID
-    };
+  // Query caller's role (any caller including guests)
+  public query ({ caller }) func getMyRole() : async AccessControl.UserRole {
+    AccessControl.getUserRole(accessControlState, caller);
   };
 
-  // Storage for inquiries
-  let inquiries = Map.empty<Nat, Inquiry>();
-  var inquiryCounter = 0;
-
-  // Create new inquiry (anonymous allowed)
-  public shared ({ caller }) func createInquiry(name : Text, email : Text, company : ?Text, message : Text, serviceInterest : Text) : async () {
-    let newInquiry : Inquiry = {
-      id = inquiryCounter;
-      name;
-      email;
-      company;
-      message;
-      serviceInterest;
-      timestamp = Time.now();
-    };
-
-    inquiries.add(inquiryCounter, newInquiry);
-    inquiryCounter += 1;
-  };
-
-  // List all inquiries (admin-only)
-  public query ({ caller }) func listInquiries() : async [Inquiry] {
-    if (not (AccessControl.isAdmin(accessControlState, caller))) {
-      Runtime.trap("Unauthorized: Only admins can view inquiries");
-    };
-    inquiries.values().toArray().sort();
-  };
-
-  // Delete inquiry by ID (admin-only)
-  public shared ({ caller }) func deleteInquiry(id : Nat) : async () {
-    if (not (AccessControl.isAdmin(accessControlState, caller))) {
-      Runtime.trap("Unauthorized: Only admins can delete inquiries");
-    };
-
-    switch (inquiries.get(id)) {
-      case (null) { Runtime.trap("Inquiry not found") };
-      case (?_) {
-        inquiries.remove(id);
-      };
-    };
+  // Check if caller is admin (any caller including guests)
+  public query ({ caller }) func amIAdmin() : async Bool {
+    AccessControl.isAdmin(accessControlState, caller);
   };
 };

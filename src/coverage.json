@@ -1,7 +1,7 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-09T04:07:51.983Z",
+  "generatedAt": "2026-02-09T05:21:22.365Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
@@ -11,42 +11,77 @@
     "implemented": 2,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Replace the current site logo image with the user-uploaded image across the site (header and footer), using a static asset under frontend/public/assets/generated and updating all logo <img> references to the new filename.",
+        "id": "REQ-1",
+        "summary": "Identify the root cause of the previous live deployment failure (“Deployment error”) by reproducing the production deployment locally (or in the CI/deploy environment) and capturing the exact failing step and error output, then apply the minimal code/config changes needed so the same deployment completes successfully.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/Section.tsx",
           "frontend/src/components/layout/SiteHeader.tsx",
-          "frontend/src/components/layout/SiteFooter.tsx"
+          "frontend/src/components/sections/HeroSection.tsx",
+          "frontend/src/components/sections/ServicesSection.tsx",
+          "frontend/src/components/sections/ProcessSection.tsx",
+          "frontend/src/components/sections/ContactSection.tsx",
+          "frontend/src/components/primitives/Button.tsx",
+          "frontend/src/components/primitives/Card.tsx",
+          "frontend/src/lib/utils.ts",
+          "frontend/public/assets/generated/hero-illustration.dim_1600x900.png",
+          "frontend/public/assets/generated/icons-set.dim_512x512.png",
+          "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "frontend/public/assets/generated/logo-email-copywriter.dim_512x256.png",
+          "frontend/DEPLOYMENT_ROOT_CAUSE.md"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
+          "frontend/src/App.tsx",
           "frontend/src/components/layout/SiteHeader.tsx",
-          "frontend/src/components/layout/SiteFooter.tsx"
+          "frontend/src/components/sections/HeroSection.tsx",
+          "frontend/src/components/sections/ServicesSection.tsx",
+          "frontend/src/components/sections/ProcessSection.tsx",
+          "frontend/src/components/sections/ContactSection.tsx",
+          "frontend/src/components/primitives/Button.tsx",
+          "frontend/src/components/primitives/Card.tsx",
+          "frontend/src/lib/utils.ts",
+          "frontend/DEPLOYMENT_ROOT_CAUSE.md"
         ]
       },
       {
-        "id": "REQ-11",
-        "summary": "Add a visible Twitter/X social link to the site that points to https://x.com/QuillworksMedia (e.g., in the header and/or footer), opening in a new tab with proper rel attributes and an accessible label.",
+        "id": "REQ-2",
+        "summary": "After the deployment succeeds, perform a post-deploy smoke test of the live site to confirm it is accessible and functional (homepage loads, header/footer render, and the Contact section external links are present).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/layout/SiteFooter.tsx"
+          "frontend/src/utils/smokeCheck.ts",
+          "frontend/src/pages/MarketingPage.tsx",
+          "frontend/SMOKE_TEST.md"
         ],
         "matchedFiles": [
-          "frontend/src/components/layout/SiteFooter.tsx"
+          "frontend/src/utils/smokeCheck.ts",
+          "frontend/SMOKE_TEST.md"
         ]
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
     "build-request.json",
-    "build-template/README.md",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/logo-quillworks.dim_512x256.png",
-    "frontend/src/components/layout/SiteFooter.tsx",
+    "frontend/DEPLOYMENT_ROOT_CAUSE.md",
+    "frontend/SMOKE_TEST.md",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
     "frontend/src/components/layout/SiteHeader.tsx",
+    "frontend/src/components/primitives/Button.tsx",
+    "frontend/src/components/primitives/Card.tsx",
+    "frontend/src/components/sections/ContactSection.tsx",
+    "frontend/src/components/sections/HeroSection.tsx",
+    "frontend/src/components/sections/ProcessSection.tsx",
+    "frontend/src/components/sections/ServicesSection.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/utils/smokeCheck.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

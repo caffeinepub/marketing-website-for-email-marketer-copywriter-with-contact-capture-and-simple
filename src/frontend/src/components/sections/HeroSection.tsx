@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '../primitives/Button';
 import { ArrowRight } from 'lucide-react';
 import { COPY } from '../../content/copy';
+import { LABELS } from '../../content/labels';
 
 export default function HeroSection() {
   const scrollToContact = () => {
@@ -34,7 +35,7 @@ export default function HeroSection() {
                   servicesSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Learn More
+                {LABELS.cta.learnMore}
               </Button>
             </div>
           </div>

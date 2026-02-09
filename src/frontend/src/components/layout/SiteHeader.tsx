@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../primitives/Button';
 import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '../../lib/navigation';
-import { useNavigate } from '@tanstack/react-router';
+import { LABELS } from '../../content/labels';
 
 export default function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -14,11 +13,6 @@ export default function SiteHeader() {
       element.scrollIntoView({ behavior: 'smooth' });
       setMobileMenuOpen(false);
     }
-  };
-
-  const handleAdminClick = () => {
-    navigate({ to: '/admin' });
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -42,16 +36,10 @@ export default function SiteHeader() {
               {item.label}
             </button>
           ))}
-          <button
-            onClick={handleAdminClick}
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Admin
-          </button>
         </nav>
 
         <div className="hidden md:block">
-          <Button onClick={() => scrollToSection('contact')}>Get Started</Button>
+          <Button onClick={() => scrollToSection('contact')}>{LABELS.cta.getStarted}</Button>
         </div>
 
         <button
@@ -75,14 +63,8 @@ export default function SiteHeader() {
                 {item.label}
               </button>
             ))}
-            <button
-              onClick={handleAdminClick}
-              className="text-left text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Admin
-            </button>
             <Button onClick={() => scrollToSection('contact')} className="w-full">
-              Get Started
+              {LABELS.cta.getStarted}
             </Button>
           </nav>
         </div>

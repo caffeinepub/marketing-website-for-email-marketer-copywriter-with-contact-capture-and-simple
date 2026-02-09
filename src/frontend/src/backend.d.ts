@@ -7,16 +7,6 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
-export type Time = bigint;
-export interface Inquiry {
-    id: bigint;
-    name: string;
-    email: string;
-    company?: string;
-    serviceInterest: string;
-    message: string;
-    timestamp: Time;
-}
 export interface UserProfile {
     name: string;
 }
@@ -26,13 +16,13 @@ export enum UserRole {
     guest = "guest"
 }
 export interface backendInterface {
+    amIAdmin(): Promise<boolean>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
-    createInquiry(name: string, email: string, company: string | null, message: string, serviceInterest: string): Promise<void>;
-    deleteInquiry(id: bigint): Promise<void>;
+    assignUserRole(user: Principal, role: UserRole): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getMyRole(): Promise<UserRole>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
-    listInquiries(): Promise<Array<Inquiry>>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
 }

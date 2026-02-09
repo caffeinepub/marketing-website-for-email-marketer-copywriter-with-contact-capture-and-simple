@@ -14,35 +14,21 @@ export const UserRole = IDL.Variant({
   'guest' : IDL.Null,
 });
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
-export const Time = IDL.Int;
-export const Inquiry = IDL.Record({
-  'id' : IDL.Nat,
-  'name' : IDL.Text,
-  'email' : IDL.Text,
-  'company' : IDL.Opt(IDL.Text),
-  'serviceInterest' : IDL.Text,
-  'message' : IDL.Text,
-  'timestamp' : Time,
-});
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'amIAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-  'createInquiry' : IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Text, IDL.Text],
-      [],
-      [],
-    ),
-  'deleteInquiry' : IDL.Func([IDL.Nat], [], []),
+  'assignUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getMyRole' : IDL.Func([], [UserRole], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
       ['query'],
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
-  'listInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
 });
 
@@ -55,35 +41,21 @@ export const idlFactory = ({ IDL }) => {
     'guest' : IDL.Null,
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
-  const Time = IDL.Int;
-  const Inquiry = IDL.Record({
-    'id' : IDL.Nat,
-    'name' : IDL.Text,
-    'email' : IDL.Text,
-    'company' : IDL.Opt(IDL.Text),
-    'serviceInterest' : IDL.Text,
-    'message' : IDL.Text,
-    'timestamp' : Time,
-  });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'amIAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
-    'createInquiry' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Text, IDL.Text],
-        [],
-        [],
-      ),
-    'deleteInquiry' : IDL.Func([IDL.Nat], [], []),
+    'assignUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getMyRole' : IDL.Func([], [UserRole], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],
         ['query'],
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
-    'listInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   });
 };
